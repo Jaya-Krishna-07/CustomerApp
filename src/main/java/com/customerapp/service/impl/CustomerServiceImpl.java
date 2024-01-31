@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,5 +31,10 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFound("Customer not found with id: " + id)
         );
+    }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
     }
 }

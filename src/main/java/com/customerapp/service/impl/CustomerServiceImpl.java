@@ -1,0 +1,26 @@
+package com.customerapp.service.impl;
+
+import com.customerapp.entity.Customer;
+import com.customerapp.repository.CustomerRepository;
+import com.customerapp.service.CustomerService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+
+@Service
+@AllArgsConstructor
+@NoArgsConstructor
+public class CustomerServiceImpl implements CustomerService {
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Override
+    public Customer createCustomer(Customer customer) {
+        String id = UUID.randomUUID().toString();
+        customer.setId(id);
+        return customerRepository.save(customer);
+    }
+}

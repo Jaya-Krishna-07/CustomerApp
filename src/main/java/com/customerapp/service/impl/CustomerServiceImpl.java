@@ -1,5 +1,6 @@
 package com.customerapp.service.impl;
 
+import com.customerapp.Exception.ResourceNotFound;
 import com.customerapp.entity.Customer;
 import com.customerapp.repository.CustomerRepository;
 import com.customerapp.service.CustomerService;
@@ -22,5 +23,12 @@ public class CustomerServiceImpl implements CustomerService {
         String id = UUID.randomUUID().toString();
         customer.setId(id);
         return customerRepository.save(customer);
+    }
+
+    @Override
+    public Customer getCustomerById(String id) {
+        return customerRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFound("Customer not found with id: " + id)
+        );
     }
 }

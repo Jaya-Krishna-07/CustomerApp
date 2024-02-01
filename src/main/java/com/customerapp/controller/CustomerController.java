@@ -4,6 +4,8 @@ import com.customerapp.entity.Customer;
 import com.customerapp.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
@@ -21,5 +23,10 @@ public class CustomerController {
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable String id){
         return customerService.getCustomerById(id);
+    }
+
+    @GetMapping
+    public List<Customer> getAllCustomers(){
+        return customerService.getAllCustomers();
     }
 }

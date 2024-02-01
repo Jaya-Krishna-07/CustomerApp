@@ -2,8 +2,6 @@ package com.customerapp.controller;
 
 import com.customerapp.entity.Customer;
 import com.customerapp.service.CustomerService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,9 +16,8 @@ public class CustomerController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
-        customer = customerService.createCustomer(customer);
-        return new ResponseEntity<>(customer, HttpStatus.CREATED);
+    public Customer createCustomer(@RequestBody Customer customer){
+        return customerService.createCustomer(customer);
     }
 
     @GetMapping("/{id}")
@@ -29,13 +26,12 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getAllCustomers(){
-        return customerService.getAllCustomers();
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteCustomer(@PathVariable String id){
-        String msg = customerService.deleteCustomer(id);
-        return msg;
+    public List<Customer> getAllCustomers(
+            @RequestParam(name = "pageNO", required = false, defaultValue = "0") int pageNo,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "5") int pageSize,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "firstName") String sortBy,
+            @RequestParam(name = "sortDir", defaultValue = "asc", required = false) String sortDir
+    ){
+        return customerService.getAllCustomers(pageNo, pageSize, sortBy, sortDir);
     }
 }

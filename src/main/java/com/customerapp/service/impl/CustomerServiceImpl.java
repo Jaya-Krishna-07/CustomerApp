@@ -37,4 +37,11 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
+
+    @Override
+    public String deleteCustomer(String id) {
+        Customer customer = getCustomerById(id);
+        customerRepository.delete(customer);
+        return "customer with id: " + id + " deleted successfully";
+    }
 }

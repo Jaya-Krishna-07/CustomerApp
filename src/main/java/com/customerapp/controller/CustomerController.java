@@ -2,6 +2,8 @@ package com.customerapp.controller;
 
 import com.customerapp.entity.Customer;
 import com.customerapp.service.CustomerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +18,9 @@ public class CustomerController {
     }
 
     @PostMapping("/create")
-    public Customer createCustomer(@RequestBody Customer customer){
-        return customerService.createCustomer(customer);
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
+        customer = customerService.createCustomer(customer);
+        return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -28,5 +31,11 @@ public class CustomerController {
     @GetMapping
     public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteCustomer(@PathVariable String id){
+        String msg = customerService.deleteCustomer(id);
+        return msg;
     }
 }

@@ -10,4 +10,6 @@ public interface CustomerService {
     Customer getCustomerById(String id);
 
     List<Customer> getAllCustomers();
+
+    String deleteCustomer(String id);
 }

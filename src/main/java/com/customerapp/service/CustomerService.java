@@ -10,4 +10,6 @@ public interface CustomerService {
     Customer getCustomerById(String id);
 
     List<Customer> getAllCustomers();
+
+    List<Customer> getAllCustomers(int pageNo, int pageSize, String sortBy, String sortDir);
 }

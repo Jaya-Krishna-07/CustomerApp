@@ -28,14 +28,23 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-    @GetMapping
-    public List<Customer> getAllCustomers(){
-        return customerService.getAllCustomers();
-    }
+//    @GetMapping
+//    public List<Customer> getAllCustomers(){
+//        return customerService.getAllCustomers();
+//    }
 
     @DeleteMapping("/{id}")
     public String deleteCustomer(@PathVariable String id){
         String msg = customerService.deleteCustomer(id);
         return msg;
+    }
+    @GetMapping
+    public List<Customer> getAllCustomers(
+            @RequestParam(name = "pageNO", required = false, defaultValue = "0") int pageNo,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "5") int pageSize,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "firstName") String sortBy,
+            @RequestParam(name = "sortDir", defaultValue = "asc", required = false) String sortDir
+    ){
+        return customerService.getAllCustomers(pageNo, pageSize, sortBy, sortDir);
     }
 }

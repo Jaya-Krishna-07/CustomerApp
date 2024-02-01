@@ -11,5 +11,5 @@ public interface CustomerService {
 
     List<Customer> getAllCustomers();
 
-    List<Customer> getAllCustomers(int pageNo, int pageSize, String sortBy, String sortDir);
+    String deleteCustomer(String id);
 }
